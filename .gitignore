@@ -1,0 +1,19 @@
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+*.iml
+
+# Java
+**/target/
+
+# Frontend
+**/node_modules/
+**/dist/
+**/.next/
+
+# Logs
+*.log
