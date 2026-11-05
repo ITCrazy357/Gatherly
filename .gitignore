@@ -17,3 +17,6 @@
 
 # Logs
 *.log
+
+# Local verification artifacts
+.verification/
