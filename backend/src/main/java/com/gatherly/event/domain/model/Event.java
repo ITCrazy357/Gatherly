@@ -1,4 +1,4 @@
-package com.gatherly.event.model;
+package com.gatherly.event.domain.model;
 
 import java.time.Instant;
 

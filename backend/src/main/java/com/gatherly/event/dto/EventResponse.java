@@ -1,6 +1,6 @@
 package com.gatherly.event.dto;
 
-import com.gatherly.event.model.Event;
+import com.gatherly.event.domain.model.Event;
 import java.time.Instant;
 
 public record EventResponse(
