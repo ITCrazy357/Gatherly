@@ -1,5 +1,6 @@
 package com.gatherly.event.application.service;
 
+import com.gatherly.event.domain.exception.EventNotFoundException;
 import com.gatherly.event.domain.model.Event;
 import com.gatherly.event.domain.repository.EventRepository;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Service
 public class EventQueryService {
-    public final EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
     public EventQueryService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;

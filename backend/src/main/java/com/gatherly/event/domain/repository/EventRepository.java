@@ -1,53 +1,19 @@
 package com.gatherly.event.domain.repository;
 
-import org.springframework.stereotype.Repository;
 import com.gatherly.event.domain.model.Event;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
+
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class EventRepository {
-    private final Map<Long, Event> events = new ConcurrentHashMap<>(); //ConcurrentHashMap hỗ trợ truy cập đồng thời
+public interface EventRepository {
 
-    private final AtomicLong idSequence = new AtomicLong(0); //AtomicLong tăng ID an toàn trong môi trường nhiều thread
+    Event save(Event event);
 
-    public Event create(Event event) {
-        Long id = idSequence.incrementAndGet();
-        Event newEvent = new Event(id, event.getTitle(), event.getDescription(), event.getLocation(),
-                event.getStartAt(), event.getEndAt(), event.getCapacity());
-        events.put(id, newEvent);
-        return newEvent;
-    }
+    List<Event> findAll();
 
-    public List<Event> findAll() {
-        return List.copyOf(events.values());
-    }
+    Optional<Event> findById(Long id);
 
-    public Optional<Event> findById(Long id) {
-        return Optional.ofNullable(events.get(id));
-    }
+    Optional<Event> update(Long id, Event event);
 
-    public Optional<Event> update(long id, Event event) {
-        Event updatedEvent = new Event(
-                id,
-                event.getTitle(),
-                event.getDescription(),
-                event.getLocation(),
-                event.getStartAt(),
-                event.getEndAt(),
-                event.getCapacity());
-
-        return Optional.ofNullable(events.computeIfPresent(id, (key, value) -> updatedEvent));
-    }
-
-    public boolean delete(Long id) {
-        return events.remove(id) != null;
-    }
-
-    public Event save(Event event) {
-        return event;
-    }
+    boolean delete(Long id);
 }

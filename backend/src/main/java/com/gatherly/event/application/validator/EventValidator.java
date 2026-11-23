@@ -1,10 +1,10 @@
 package com.gatherly.event.application.validator;
 
-
 import com.gatherly.event.domain.model.Event;
+import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 
+@Component
 public class EventValidator {
 
     public void validate(Event event) {
@@ -28,16 +28,14 @@ public class EventValidator {
             throw new IllegalArgumentException("Start and end time cannot be null");
         }
 
-        if(event.getStartAt().isBefore(event.getEndAt())){
-            throw new IllegalArgumentException("Start time cannot be before end time");
+        if (!event.getStartAt().isBefore(event.getEndAt())) {
+            throw new IllegalArgumentException(
+                    "Start time must be before end time"
+            );
         }
 
-        if(event.getEndAt().isAfter(event.getStartAt())){
-            throw new IllegalArgumentException("End time cannot be after start time");
-        }
-
-        if(event.getCapacity() <= 0){
-            throw new IllegalArgumentException("Capacity cannot be less than 0");
+        if (event.getCapacity() == null || event.getCapacity() <= 0) {
+            throw new IllegalArgumentException("Capacity must be greater than 0");
         }
     }
 }

@@ -3,6 +3,7 @@ package com.gatherly.event.dto;
 import com.gatherly.event.domain.model.Event;
 import java.time.Instant;
 
+
 public record EventResponse(
                 Long id,
                 String title,
