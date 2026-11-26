@@ -67,4 +67,12 @@ public class EventCommandService {
 
         return eventRepository.update(id, patchedEvent).orElseThrow(() -> new EventNotFoundException(id));
     }
+
+    public void delete(Long id){
+        boolean deleted = eventRepository.delete(id);
+
+        if(!deleted) {
+            throw new EventNotFoundException(id);
+        }
+    }
 }

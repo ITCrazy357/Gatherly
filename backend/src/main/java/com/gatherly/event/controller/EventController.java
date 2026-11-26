@@ -92,4 +92,12 @@ public class EventController {
         Event patchedEvent = eventCommandService.patchUpdate(id, updateRequest);
         return ResponseEntity.ok(EventResponse.from(patchedEvent));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(
+            @PathVariable Long id
+    ){
+        eventCommandService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
